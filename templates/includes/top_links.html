@@ -1,0 +1,28 @@
+{% load static %}
+<!-- Font Google -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fjalla+One&amp;subset=latin-ext" rel="stylesheet">
+<link rel="shortcut icon" href="{% static '/assets/img/favicon.ico'%}" type="image/x-icon">
+<link rel="icon" href="{% static '/assets/img/favicon.ico'%}" type="image/x-icon">
+<!-- custom styles (optional) -->
+
+
+<link href="{% static '/assets/css/plugins.css'%}" rel="stylesheet">
+<link href="{% static '/assets/css/style.css'%}" rel="stylesheet">
+<link href="{% static '/assets/css/responsive.css'%}" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link href="{% static 'mycss.css'%}" rel="stylesheet">
+
+
+<style>
+@font-face {
+  font-family: Nepali;
+  src: url({% static 'Nepali.TTF' %});
+}
+</style>
+
+<script>
+    var token = '{{csrf_token}}';
+    var audio = new Audio("{% static 'to-the-point.mp3' %}");
+</script>

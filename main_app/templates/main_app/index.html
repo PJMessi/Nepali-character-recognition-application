@@ -1,0 +1,442 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+
+
+    <section class="contact-p section-padding" style="padding-top: 40px!important">
+        <div class="container">
+            <div class="row justify-content-md-center  align-items-center">
+
+                {% comment %} controls {% endcomment %}
+                <div class="col-lg-6">
+                    <div class="contact-info">
+
+                        <div style="margin-top: 25px" class="title-box">
+                            <h3>Aurora :)</h3>
+                            <div class="lineStagger"></div>
+                        </div>
+
+                        <div class="desc">
+                            <ul>
+                                <li>I am Aurora, a tensorflow model.</li>                                
+                                <li>I try to recognize the nepali character that you enter in the canvas beside.</li>
+                                <li><a class="redHover" title="Click to get help." onclick="$('#help_modal').modal('show')">Help?</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="info-inf">
+                            <div class="row pl-0 pr-0">
+                                <div class="col-md-12">
+                                    <div class="in-box" style="font-size: 2rem">
+                                        <h4>Result</h4>
+                                        <p>I think that character is : </p>
+                                        <p id="result">इन्पुट दिनुहोस</p>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="mail-dtls">
+                            <hr>   
+
+                            <span class="maill">
+                                <a title="Click to send me an email." href="mailto:pjmessi25@gmail.com">pjmessi25@gmail.com</a>
+                            </span>                            
+                            <a title="Click to get this project source code at github." class="btn" >Github</a>
+ 
+                        </div>
+
+                    </div>                    
+                </div>
+
+                {% comment %} canvas {% endcomment %}
+                <div class="col-lg-5">     
+
+                    <div id="sketch">
+                        <div id="mnistapp">                            
+                            <canvas id="sketchpad" height="280" width="280"></canvas>                               
+                        </div>
+                        <div class="info-inf">
+                            <div class="row pl-0 pr-0">
+                                <div class="col-md-12">
+                                    <div class="in-box" style="font-size: 2rem; margin-top:70px">
+
+                                        <a title="Click to clear the canvas." id="clearbutton" onclick="clearCanvas(canvas,ctx);" class="custom-btn">
+                                            <span class="custom-btn__label" style="color: #fd4145"><b>redraw</b></span>
+                                            <span class="custom-btn__icon">
+                                                <span class="custom-btn__icon-small">
+                                                    <!--?xml version="1.0" encoding="utf-8"?-->
+                                                    <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                                        <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                                    </svg>
+                                                </span>
+                                                <span class="custom-btn__icon-circle">
+                                                    <!--?xml version="1.0" encoding="utf-8"?-->
+                                                    <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                                        <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                                        <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </a>      
+
+                                        <a title="Click to make the model predict your data." id="predictbutton" class="custom-btn">
+                                            <span class="custom-btn__label"><b id="predictbutton_text">predict</b></span>
+                                            <span class="custom-btn__icon">
+                                                <span class="custom-btn__icon-small">
+                                                    <!--?xml version="1.0" encoding="utf-8"?-->
+                                                    <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                                        <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                                    </svg>
+                                                </span>
+                                                <span class="custom-btn__icon-circle">
+                                                    <!--?xml version="1.0" encoding="utf-8"?-->
+                                                    <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                                        <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                                        <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </a> 
+
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>         
+                    </div>   
+                                
+                    <hr>
+
+                    <div class="row" style="margin-top:80px">
+                        
+                        <a class="btn redHover" onclick="$('#refresh_modal').modal('show')" title="Click to refresh the model.">
+                            <b><i class="fas fa-sync-alt"></i> Reset Modal</b>  
+                        </a>
+                        <a style="display:none" id="show_train_modal" onclick="$('#train_modal').modal('show')" class="btn redHover" title="Click to train the model with this current data.">
+                            <b><i class="fab fa-readme"></i> Train model</b>  
+                        </a> 
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+    <div style="z-index:9999" class="modal fade" id="help_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #1b1b1b; text-align:center">
+
+                <div id="message_result" class="modal-header" style="display:block; color: #fff">
+                    <ul class = "help_box">
+                        <li>Use your keyboard or touchpad to draw a nepali digit on the canvas beside.</li>
+                        <li>Press the 'Recognize' button to recognize the digit.</li>
+                        <li>Give it a couple of seconds and it displays the result.</li>
+                        <li>Press 'Reset' to try again.</li>
+                    </ul>                 
+                </div>
+
+                <div class="modal-footer" style="display:block;">
+                    <button data-dismiss="modal" class="custom-btn">
+                        <span class="custom-btn__label">Close</span>
+                        <span class="custom-btn__icon">
+                            <span class="custom-btn__icon-small">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                </svg>
+                            </span>
+                            <span class="custom-btn__icon-circle">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                    <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="z-index:9999" class="modal fade" id="refresh_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #1b1b1b; text-align:center">
+
+                <div id="message_result" class="modal-header" style="display:block; color: #fff">
+                    <ul class = "help_box">
+                        <li>Refreshing the modal will remove all the knowledge from the model and retrain it with initial data only.</li>
+                        <li>This might take quite a while. So, please be patience.</li>
+                        <li>Click the button below to start refreshing.</li>
+                    </ul>                 
+                </div>
+
+                <div class="modal-footer" style="display:block;">
+                    <p id="refresh_modal_message" class="modal_message hide">Refreshing....</p>
+                    <br>
+                    <button id="refresh_modal_btn" class="custom-btn">
+                        <span class="custom-btn__label">Refresh modal</span>
+                        <span class="custom-btn__icon">
+                            <span class="custom-btn__icon-small">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                </svg>
+                            </span>
+                            <span class="custom-btn__icon-circle">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                    <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+
+                    <button id="close_refresh_modal_btn" data-dismiss="modal" class="custom-btn hide">    
+                        <span class="custom-btn__icon">
+                            <span class="custom-btn__icon-small">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                </svg>
+                            </span>
+                            <span class="custom-btn__icon-circle">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                    <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div style="z-index:9999;" class="modal fade" id="train_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background-color: #1b1b1b; text-align:center">
+
+                <div id="message_result" class="modal-header" style="display:block; color: #fff">
+                    <ul class = "help_box">
+                        <li>
+                            Is this the digit that you drew in the canvas?<br>
+                            <small>If not, please correct it.</small>                        
+                        </li>                              
+                        <!-- <li><input id="modal_result" type="text" style="width:30px; text-align:center; color:#fff; background:#1b1b1b; border:0px; border-bottom: 6px solid #fd4145; font-size:2rem;"></li> -->
+                        <select name="modal_result" id="canvas_data">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+
+                            <option value="10">क</option>
+                            <option value="11">ख</option>
+                            <option value="12">ग</option>
+                            <option value="13">घ</option>
+                            <option value="14">ङ</option>
+                            <option value="15">च</option>
+                            <option value="16">छ</option>
+                            <option value="17">ज</option>
+                            <option value="18">झ</option>
+                            <option value="19">ञ</option>
+                            <option value="20">ट</option>
+                            <option value="21">ठ</option>
+                            <option value="22">ड</option>
+                            <option value="23">ढ</option>
+                            <option value="24">ण</option>
+                            <option value="25">त</option>
+                            <option value="26">थ</option>
+                            <option value="27">द</option>
+                            <option value="28">ध</option>
+                            <option value="29">न</option>
+                            <option value="30">प</option>
+                            <option value="31">फ</option>
+                            <option value="32">ब</option>
+                            <option value="33">भ</option>
+                            <option value="34">म</option>
+                            <option value="35">य</option>
+                            <option value="36">र</option>
+                            <option value="37">ल</option>
+                            <option value="38">व</option>
+                            <option value="39">श</option>
+                            <option value="40">ष</option>
+                            <option value="41">स</option>
+                            <option value="42">ह</option>
+                            <option value="43">क्ष</option>
+                            <option value="44">त्र</option>
+                            <option value="45">ज्ञ</option>
+
+                            <option value="46">अ</option>
+                            <option value="47">आ</option>
+                            <option value="48">इ</option>
+                            <option value="49">ई</option>
+                            <option value="50">उ</option>
+                            <option value="51">ऊ</option>
+                            <option value="52">ए</option>
+                            <option value="53">ऐ</option>
+                            <option value="54">ओ</option>
+                            <option value="55">औ</option>
+                            <option value="56">अं</option>
+                            <option value="57">अ:</option>
+
+                        </select>
+                    </ul> 
+                </div>
+                
+                <div class="modal-footer" style="display:block;">
+                    <p id="train_modal_message" class="hide">Trainning...</p>
+                    <button id="train_modal_btn" class="custom-btn">
+                        <span class="custom-btn__label">Train Model</span>
+                        <span class="custom-btn__icon">
+                            <span class="custom-btn__icon-small">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                </svg>
+                            </span>
+                            <span class="custom-btn__icon-circle">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                    <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                    <button style="display:none" id="close_train_modal_btn" data-dismiss="modal" class="custom-btn">
+
+                        <span class="custom-btn__icon">
+                            <span class="custom-btn__icon-small">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <polygon points="33.7,95.8 27.8,90.5 63.9,50 27.8,9.5 33.7,4.2 74.6,50 "></polygon>
+                                </svg>
+                            </span>
+                            <span class="custom-btn__icon-circle">
+                                <!--?xml version="1.0" encoding="utf-8"?-->
+                                <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve">
+                                    <path class="bottomcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                    <path class="topcircle" d="M18.2,18.2c17.6-17.6,46-17.6,63.6,0s17.6,46,0,63.6s-46,17.6-63.6,0"></path>
+                                </svg>
+                            </span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% comment %} <html>
+<head>
+    <title>MNIST</title>
+    {% load static %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="{% static 'myjs.js' %}"></script>    
+    <link rel="stylesheet" href="{% static 'mycss.css' %}">
+
+    <script>
+        var token = '{{csrf_token}}';
+    </script>
+  
+</head>
+
+<body onload="init()">
+    <div id="mnistapp">
+        <h4 style="margin-left: 10px;">Draw a number in the left-hand box</h4>
+        <div class="leftside">
+            <canvas id="sketchpad" height="140" width="140"></canvas>
+            <button id="predictbutton">Predict</button>
+            <input type="submit" value="Clear" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
+        </div>
+        <div id="rightside" class="rightside">
+        </div>
+        <br><hr>
+        <button id="make_model">Make model</button>
+    </div>
+
+    <script>    
+
+        $("#predictbutton").click(function(){
+            var canvas = document.getElementById('sketchpad');
+            var img = canvas.toDataURL();
+            img = encodeURIComponent(img);	
+
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: "POST",
+                url: '/predict_digit/',
+                data: img,
+                success: function(data){	
+                    $("#rightside").text(data.result);
+                }
+            });
+
+        })
+
+        $("#make_model").click(function(){          
+            $.ajax({
+                headers: { "X-CSRFToken": token },
+                type: "POST",
+                url: '/make_model/',
+               
+                success: function(data){	
+                    alert(data.result)
+                }
+            });
+
+        })
+
+    </script>
+
+</body>
+
+</html> {% endcomment %}

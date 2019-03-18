@@ -1,0 +1,32 @@
+/*-----------------------------------------------------------------------------------
+
+	Template Name: 
+	Template URI: 
+	Description: 
+	Author: design_grid
+	Author URI:
+	Version: 1.0
+
+-----------------------------------------------------------------------------------*/
+
+/* ----------------------------------------------------------------
+			[ All Css Plugins & Helper Classes File ]
+-----------------------------------------------------------------*/
+
+/* == bootstrap == */
+@import url("plugins/bootstrap.min.css");
+
+/* == fontawesome == */
+@import url("plugins/fontawesome-all.min.css");
+
+/* == animate == */
+@import url("plugins/animate.css");
+
+/* == slick == */
+@import url("plugins/slick.css");
+
+/* == aos == */
+@import url("plugins/aos.css");
+
+/* == aos == */
+@import url("plugins/jquery.fancybox.min.css");

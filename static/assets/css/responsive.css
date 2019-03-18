@@ -1,0 +1,210 @@
+/*-----------------------------------------------------------
+    Responsive
+-------------------------------------------------------------*/
+@media (max-width: 991px) {
+  body {
+    overflow: auto !important;
+  }
+
+  .sm-mb-30 {
+    margin-bottom: 30px;
+  }
+
+  .sm-mb-50 {
+    margin-bottom: 50px;
+  }
+
+  .site-header {
+    display: none;
+  }
+
+  .title-box .lineStagger {
+    display: none;
+  }
+
+  .header-top.header-stickytop {
+    background: #1b1b1b;
+    height: auto;
+  }
+
+  .title-box {
+    margin-bottom: 50px;
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-info .slide-meta {
+    margin-bottom: 15px !important;
+  }
+
+  .intro .info-title {
+    padding-top: 0;
+    margin-bottom: 30px;
+  }
+
+  .proj-slider .item-project img {
+    padding-left: 15px;
+  }
+
+  .header-top .header-container {
+    padding: 0 15px;
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-current {
+    width: 100%;
+    left: auto;
+  }
+
+  .dsn-grid-slider .dsn-grid-content.dsn-demo .dsn-grid-info {
+    left: auto;
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-info {
+    width: 100%;
+    left: auto;
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-prev {
+    display: none;
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-info .slide-meta .slide-meta__item, .dsn-grid-slider .dsn-grid-content .dsn-grid-info .slide-meta .single-meta__item {
+    margin-bottom: 15px;
+  }
+
+  .dsn-progress-circle {
+    display: none;
+  }
+
+  .contact-section .contact-box .box h2 {
+    font-size: 36px;
+  }
+
+  .contact-p .contact-info .mail-dtls {
+    margin-bottom: 30px;
+  }
+
+  .footer .content-block .column-logo {
+    margin-bottom: 30px;
+  }
+
+  .footer {
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
+  }
+  .footer .social-content {
+    text-align: center;
+  }
+  .footer .content-block {
+    text-align: center;
+  }
+  .footer .content-block .column-contact {
+    margin-bottom: 30px;
+  }
+
+  .comment-reply-form .custom-btn {
+    margin-bottom: 50px;
+  }
+
+  .sidebar-single {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+}
+@media (max-width: 767px) {
+  body {
+    overflow: auto !important;
+  }
+
+  .contact-section .contact-box .box h2 {
+    font-size: 24px;
+  }
+
+  .nav .inner .logo {
+    left: 15px;
+  }
+
+  .hero .content h2 {
+    font-size: 8vw;
+  }
+
+  .project-next-box .next-project a .next-title {
+    font-size: 8vw;
+  }
+
+  .contact-section .contact-box .box .bg, .project-next-box .next-project a .project-next-bg, .post-next-bg {
+    -webkit-clip-path: circle(47.6% at 50% 50%);
+    clip-path: circle(47.6% at 50% 50%);
+  }
+
+  .dsn-grid-slider .dsn-grid-content .dsn-grid-info .slide-content__kicker {
+    display: none;
+  }
+
+  .mean-content .content-area .post-item .entry-header .title-box {
+    font-size: 24px;
+  }
+
+  .dsn-logo ul li {
+    padding: 5px;
+  }
+
+  .header-project .content h2 {
+    font-size: 36px;
+  }
+
+  .contact-p .form-box .input__wrap .form-group label {
+    font-size: 16px;
+  }
+
+  .header-project .content h3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+  }
+
+  .intro .intro-description ul li {
+    margin-bottom: 15px;
+  }
+
+  .proj-container .box-im .caption {
+    right: calc(15% - 0px);
+  }
+
+  .p-img .col-lg-6:nth-child(even) {
+    margin-top: 0;
+  }
+
+  .dsn-quote .quote-content p {
+    font-size: 18px;
+  }
+
+  .about-info h4 {
+    font-size: 24px;
+  }
+
+  .p-intro {
+    font-size: 18px;
+  }
+
+  .post-comment .comment-list .comment {
+    padding-left: 0;
+  }
+}
+@media (max-width: 575px) {
+  body {
+    overflow: auto !important;
+  }
+
+  .contact-section .contact-box .box h2 {
+    font-size: 18px;
+  }
+
+  .contact-p .contact-info .mail-dtls .dsn {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .contact-p .contact-info .mail-dtls .maill {
+    margin-left: 0;
+  }
+}

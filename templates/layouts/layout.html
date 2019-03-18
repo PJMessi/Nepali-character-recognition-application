@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="discrption" content="parallax one page">
+    <meta name="keyword" content="agency, business, corporate, creative, freelancer, interior, joomla template, K2 Blog, minimal, modern, multipurpose, personal, portfolio, responsive, simple">
+    
+    <!--  Title -->
+    <title>Nepali Character Recognition</title>
+
+    {% comment %} top links {% endcomment %}
+    {% include 'includes/top_links.html' %}
+    
+</head>
+
+<body  onload="init()" {% block bodyClass %}{% endblock bodyClass %}>
+
+    {% comment %} preloader {% endcomment %}
+    <div class="dsn-loader">
+        <div class="dsn-up"></div>
+        <div class="dsn-progress-page"></div>
+        <div class="dsn-down"></div>
+    </div>
+    
+    {% comment %} nabar {% endcomment %}
+    {% include 'includes/navbar.html' %}
+
+
+    {% comment %} content {% endcomment %}
+    {% block content %}
+    {% endblock content %}
+
+
+    {% if title != "Blogs" %}
+        {% comment %} footer {% endcomment %}
+        {% include 'includes/footer.html' %}
+    {% endif %}
+
+    {% comment %} goto top {% endcomment %}
+    <div data-dsn-grid="progress-circle" data-dsn-grid-stroke="#fff">
+        <div class="icon__fixed" data-dsn-grid="parallax">
+            <i class="fas fa-angle-up"></i>
+        </div>
+    </div>
+
+
+    {% comment %} bottom links {% endcomment %}
+    {% include 'includes/bottom_links.html' %}
+</body>
+</html>

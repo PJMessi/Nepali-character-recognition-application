@@ -1,0 +1,62 @@
+        /* Some CSS styling */
+        #mnistapp {
+            /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .rightside {
+            float: left;
+            width: 140px;
+            height: 125px;
+            background-color: #def;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .leftside {
+            float: left;
+            width: 150px;
+            height: 200px;
+            margin-left: 10px;
+        }
+        #sketchpad {
+            float: left;
+            height: 280px;
+            width: 280px;
+            border: 2px solid #888;
+            border-radius: 4px;
+            position: relative;
+            background-color: black;
+            /* Necessary for correct mouse co-ords in Firefox */
+        }
+
+        .help_box li{
+            margin-bottom: 15px !important;
+        }
+
+        .redHover{
+            color:#fff !important;
+        }
+        .redHover:hover{
+            color:#fd4145 !important;
+        }
+        a.disable {
+            pointer-events: none;
+            cursor: default;
+        }
+        #modal_message{
+            margin: 10px;
+        }
+        .hide{
+            display:none;
+        }
+        #result{
+            color:#fd4145;
+            font-weight: bold;
+            font-size: 5rem;
+            font-family: Nepali;
+            text-align: center;
+        }
