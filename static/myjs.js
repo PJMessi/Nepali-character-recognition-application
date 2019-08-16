@@ -1,5 +1,5 @@
 //pen size
-pen_size = 17
+pen_size = 30
 // Variables for referencing the canvas and 2dcanvas context
 var canvas, ctx;
 // Variables to keep track of the mouse position and left-button status 
@@ -167,6 +167,7 @@ function clearCanvas(canvas, ctx) {
     $("#result").text("इन्पुट दिनुहोस"); //changing the result text to nothing
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     $("#show_train_modal").fadeOut("fast"); //hiding the button to train the modal.
+    $("#result2").text(" ");        
 }
 
 $("#predictbutton").click(function(){
@@ -185,6 +186,9 @@ $("#predictbutton").click(function(){
         data: img,
         success: function(data){	
             $("#result").text(display_full_result(data.result)); //changing the result text to show the result
+            if(data.result == "10") {
+                $("#result2").text(display_full_result(data.result2));
+            }
             audio.play(); //playing a notification sound to denote the prediciton is complete
             $("#predictbutton").removeClass('disable'); //making the predict button clickable again
             $("#predictbutton_text").text('predict'); //changing the predict button text
@@ -203,185 +207,233 @@ $("#predictbutton").click(function(){
 function display_full_result(result){
     switch(result){
         case 0:
-            return "0, शुन्य";
-            break;
-        case 1:
-            return "1, एक";
-            break;
-        case 2:
-            return "2, दुई";
-            break;
-        case 3:
-            return "3, तिन";
-            break;
-        case 4:
-            return "4, चार";
-            break;
-        case 5:
-            return "5, पाँच";
-            break;
-        case 6:
-            return "6, छ";
-            break;
-        case 7:
-            return "7, सात";
-            break;
-        case 8:
-            return "8, आठ";
-            break;
-        case 9:
-            return "9, नौ";
-            break;
-
-        case 10:
             return "क";
-            break;        
-        case 11:
+            break; 
+        case 1:
             return "ख";
             break;
-        case 12:
+        case 2:
             return "ग";
             break;        
-        case 13:
+        case 3:
             return "घ";
             break;
-        case 14:
+        case 4:
             return "ङ";
             break;        
-        case 15:
+        case 5:
             return "च";
             break;
-        case 16:
+        case 6:
             return "छ";
             break;        
-        case 17:
+        case 7:
             return "ज";
             break;
-        case 18:
+        case 8:
             return "झ";
             break;
-        case 19:
+        case 9:
             return "ञ";
             break;        
-        case 20:
-            return "ट";
-            break;
-        case 21:
-            return "ठ";
-            break;        
-        case 22:
-            return "ड";
-            break;
-        case 23:
-            return "ढ";
-            break;        
-        case 24:
-            return "ण";
-            break;
-        case 25:
-            return "त";
-            break;        
-        case 26:
-            return "थ";
-            break;
-        case 27:
-            return "द";
-            break;        
-        case 28:
-            return "ध";
-            break;
-        case 29:
-            return "न";
-            break;
-        case 30:
-            return "प";
-            break;        
-        case 31:
-            return "फ";
-            break;
-        case 32:
-            return "ब";
-            break;        
-        case 33:
-            return "भ";
-            break;
-        case 34:
-            return "म";
-            break;        
-        case 35:
-            return "य";
-            break;
-        case 36:
-            return "र";
-            break;        
-        case 37:
-            return "ल";
-            break;
-        case 38:
-            return "व";
-            break;        
-        case 39:
-            return "श";
-            break;
-        case 40:
-            return "ष";
-            break;
-        case 41:
-            return "स";
-            break;        
-        case 42:
-            return "ह";
-            break;
-        case 43:
-            return "क्ष";
-            break;        
-        case 44:
-            return "त्र";
-            break;
-        case 45:
-            return "ज्ञ";
+        case 10:
+            // return "मिलेन"   
+            return "निश्चित छैन"    
             break;
 
-        case 46:
-            return "अ";
-            break;
-        case 47:
-            return "आ";
-            break;        
-        case 48:
-            return "इ";
-            break;
-        case 49:
-            return "ई";
-            break;        
-        case 50:
-            return "उ";
-            break;
-        case 51:
-            return "ऊ";
-            break;        
-        // case 52:
-        //     return "ऋ";
-        //     break;
-        case 52:
-            return "ए";
-            break;
-        case 53:
-            return "ऐ";
-            break;        
-        case 54:
-            return "ओ";
-            break;
-        case 55:
-            return "औ";
-            break;        
-        case 56:
-            return "अं";
-            break;
-        case 57:
-            return "अः";
-            break;
+        
     }
+    // switch(result){
+    //     case 99:
+    //         return ".......";
+    //         break;
+
+    //     case 0:
+    //         return "0, शुन्य";
+    //         break;
+    //     case 1:
+    //         return "1, एक";
+    //         break;
+    //     case 2:
+    //         return "2, दुई";
+    //         break;
+    //     case 3:
+    //         return "3, तिन";
+    //         break;
+    //     case 4:
+    //         return "4, चार";
+    //         break;
+    //     case 5:
+    //         return "5, पाँच";
+    //         break;
+    //     case 6:
+    //         return "6, छ";
+    //         break;
+    //     case 7:
+    //         return "7, सात";
+    //         break;
+    //     case 8:
+    //         return "8, आठ";
+    //         break;
+    //     case 9:
+    //         return "9, नौ";
+    //         break;
+
+    //     // case 10:
+    //     //     return "क";
+    //     //     break; 
+    //     case 10:
+    //         // return "मिलेन"   
+    //         return "निश्चित छैन"    
+    //         break;
+
+    //     case 11:
+    //         return "ख";
+    //         break;
+    //     case 12:
+    //         return "ग";
+    //         break;        
+    //     case 13:
+    //         return "घ";
+    //         break;
+    //     case 14:
+    //         return "ङ";
+    //         break;        
+    //     case 15:
+    //         return "च";
+    //         break;
+    //     case 16:
+    //         return "छ";
+    //         break;        
+    //     case 17:
+    //         return "ज";
+    //         break;
+    //     case 18:
+    //         return "झ";
+    //         break;
+    //     case 19:
+    //         return "ञ";
+    //         break;        
+    //     case 20:
+    //         return "ट";
+    //         break;
+    //     case 21:
+    //         return "ठ";
+    //         break;        
+    //     case 22:
+    //         return "ड";
+    //         break;
+    //     case 23:
+    //         return "ढ";
+    //         break;        
+    //     case 24:
+    //         return "ण";
+    //         break;
+    //     case 25:
+    //         return "त";
+    //         break;        
+    //     case 26:
+    //         return "थ";
+    //         break;
+    //     case 27:
+    //         return "द";
+    //         break;        
+    //     case 28:
+    //         return "ध";
+    //         break;
+    //     case 29:
+    //         return "न";
+    //         break;
+    //     case 30:
+    //         return "प";
+    //         break;        
+    //     case 31:
+    //         return "फ";
+    //         break;
+    //     case 32:
+    //         return "ब";
+    //         break;        
+    //     case 33:
+    //         return "भ";
+    //         break;
+    //     case 34:
+    //         return "म";
+    //         break;        
+    //     case 35:
+    //         return "य";
+    //         break;
+    //     case 36:
+    //         return "र";
+    //         break;        
+    //     case 37:
+    //         return "ल";
+    //         break;
+    //     case 38:
+    //         return "व";
+    //         break;        
+    //     case 39:
+    //         return "श";
+    //         break;
+    //     case 40:
+    //         return "ष";
+    //         break;
+    //     case 41:
+    //         return "स";
+    //         break;        
+    //     case 42:
+    //         return "ह";
+    //         break;
+    //     case 43:
+    //         return "क्ष";
+    //         break;        
+    //     case 44:
+    //         return "त्र";
+    //         break;
+    //     case 45:
+    //         return "ज्ञ";
+    //         break;
+
+    //     case 46:
+    //         return "अ";
+    //         break;
+    //     case 47:
+    //         return "आ";
+    //         break;        
+    //     case 48:
+    //         return "इ";
+    //         break;
+    //     case 49:
+    //         return "ई";
+    //         break;        
+    //     case 50:
+    //         return "उ";
+    //         break;
+    //     case 51:
+    //         return "ऊ";
+    //         break;        
+    //     // case 52:
+    //     //     return "ऋ";
+    //     //     break;
+    //     case 52:
+    //         return "ए";
+    //         break;
+    //     case 53:
+    //         return "ऐ";
+    //         break;        
+    //     case 54:
+    //         return "ओ";
+    //         break;
+    //     case 55:
+    //         return "औ";
+    //         break;        
+    //     case 56:
+    //         return "अं";
+    //         break;
+    //     case 57:
+    //         return "अः";
+    //         break;
+        
+    // }
 }
 
 $("#refresh_modal_btn").click(function(){   

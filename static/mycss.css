@@ -56,7 +56,12 @@
         #result{
             color:#fd4145;
             font-weight: bold;
-            font-size: 5rem;
+            font-size: 2rem;
             font-family: Nepali;
             text-align: center;
+        }
+        #result2{
+            color:#fd4145 !important;
+            font-family: Nepali !important;
+            font-weight: bold !important;
         }

@@ -12,14 +12,14 @@
                     <div class="contact-info">
 
                         <div style="margin-top: 25px" class="title-box">
-                            <h3>Aurora :)</h3>
+                            <h3>Nepali Character Prediction</h3>
                             <div class="lineStagger"></div>
                         </div>
 
                         <div class="desc">
                             <ul>
-                                <li>I am Aurora, a tensorflow model.</li>                                
-                                <li>I try to recognize the nepali character that you enter in the canvas beside.</li>
+                                <li>This is a CNN application.</li>                                
+                                <li>It tries to recognize the nepali character that you enter in the canvas beside.</li>
                                 <li><a class="redHover" title="Click to get help." onclick="$('#help_modal').modal('show')">Help?</a></li>
                             </ul>
                         </div>
@@ -29,8 +29,10 @@
                                 <div class="col-md-12">
                                     <div class="in-box" style="font-size: 2rem">
                                         <h4>Result</h4>
-                                        <p>I think that character is : </p>
-                                        <p id="result">इन्पुट दिनुहोस</p>
+                                        <small>I think that character is : </small>
+                                        <small id="result">इन्पुट दिनुहोस</small>
+                                        <br>
+                                        <small>Low chances to be: </small><small id="result2"></small>
                                     </div>
                                 </div>                                
                             </div>
@@ -38,7 +40,7 @@
 
                        
 
-                        <div class="mail-dtls">
+                        <!-- <div class="mail-dtls">
                             <hr>   
 
                             <span class="maill">
@@ -46,7 +48,7 @@
                             </span>                            
                             <a title="Click to get this project source code at github." class="btn" >Github</a>
  
-                        </div>
+                        </div> -->
 
                     </div>                    
                 </div>
@@ -120,7 +122,7 @@
                     <div class="row" style="margin-top:80px">
                         
                         <a class="btn redHover" onclick="$('#refresh_modal').modal('show')" title="Click to refresh the model.">
-                            <b><i class="fas fa-sync-alt"></i> Reset Modal</b>  
+                            <b><i class="fas fa-sync-alt"></i> Reset Entire Modal</b>  
                         </a>
                         <a style="display:none" id="show_train_modal" onclick="$('#train_modal').modal('show')" class="btn redHover" title="Click to train the model with this current data.">
                             <b><i class="fab fa-readme"></i> Train model</b>  
@@ -373,70 +375,3 @@
 {% endblock content %}
 
 
-{% comment %} <html>
-<head>
-    <title>MNIST</title>
-    {% load static %}
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <script src="{% static 'myjs.js' %}"></script>    
-    <link rel="stylesheet" href="{% static 'mycss.css' %}">
-
-    <script>
-        var token = '{{csrf_token}}';
-    </script>
-  
-</head>
-
-<body onload="init()">
-    <div id="mnistapp">
-        <h4 style="margin-left: 10px;">Draw a number in the left-hand box</h4>
-        <div class="leftside">
-            <canvas id="sketchpad" height="140" width="140"></canvas>
-            <button id="predictbutton">Predict</button>
-            <input type="submit" value="Clear" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
-        </div>
-        <div id="rightside" class="rightside">
-        </div>
-        <br><hr>
-        <button id="make_model">Make model</button>
-    </div>
-
-    <script>    
-
-        $("#predictbutton").click(function(){
-            var canvas = document.getElementById('sketchpad');
-            var img = canvas.toDataURL();
-            img = encodeURIComponent(img);	
-
-            $.ajax({
-                headers: { "X-CSRFToken": token },
-                type: "POST",
-                url: '/predict_digit/',
-                data: img,
-                success: function(data){	
-                    $("#rightside").text(data.result);
-                }
-            });
-
-        })
-
-        $("#make_model").click(function(){          
-            $.ajax({
-                headers: { "X-CSRFToken": token },
-                type: "POST",
-                url: '/make_model/',
-               
-                success: function(data){	
-                    alert(data.result)
-                }
-            });
-
-        })
-
-    </script>
-
-</body>
-
-</html> {% endcomment %}
