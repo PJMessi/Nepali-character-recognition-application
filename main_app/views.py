@@ -98,6 +98,19 @@ def predict_digit(request):
                 prediction = argmax(predictions[0])
 
                 # start image compare ================================================================================================================================================================================          
+
+                #retrieving the canvas image----------------------------------------------
+                #converting canvas img to 32 by 32 bit (size of training dataset)
+                with open('jpg_image.jpg', 'r+b') as f: 
+                        with Image.open(f) as image:
+                                cover = resizeimage.resize_cover(image, [32, 32])
+                                cover.save('user_image.png', image.format)
+
+                user_image = cv2.imread("user_image.png")
+                user_image = cv2.cvtColor(user_image, cv2.COLOR_BGR2GRAY)                   
+                cv2.imwrite('C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\compare_img_2.png', user_image)
+                #--------------------------------------------------------------------------
+
                 # prediction.item() contains the character label predicted by the model
                 print("==============================================================================================================================")
                 print("Model prediction: " + str(prediction.item()))
@@ -112,19 +125,6 @@ def predict_digit(request):
                 predicted_character_image = cv2.cvtColor(predicted_character_image, cv2.COLOR_BGR2GRAY)
                 cv2.imwrite('C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\compare_img_1.png', predicted_character_image)
                 #------------------------------------------------------------------------
-
-                #retrieving the canvas image----------------------------------------------
-
-                #converting canvas img to 32 by 32 bit (size of training dataset)
-                with open('jpg_image.jpg', 'r+b') as f: 
-                        with Image.open(f) as image:
-                                cover = resizeimage.resize_cover(image, [32, 32])
-                                cover.save('user_image.png', image.format)
-
-                user_image = cv2.imread("user_image.png")
-                user_image = cv2.cvtColor(user_image, cv2.COLOR_BGR2GRAY)                   
-                cv2.imwrite('C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\compare_img_2.png', user_image)
-                #--------------------------------------------------------------------------
                	
                 original = cv2.imread("compare_img_1.png")
                 image_to_compare = cv2.imread("compare_img_2.png")
