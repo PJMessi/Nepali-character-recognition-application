@@ -42,7 +42,7 @@ def refresh_model(request):
     x_train = x_train.reshape(len(x_train), 32, 32, 1)
     x_test = x_test.reshape(len(x_test), 32, 32, 1)
 
-    number_of_classes = 11
+    number_of_classes = 46
     y_train = np_utils.to_categorical(y_train, number_of_classes)
     y_test = np_utils.to_categorical(y_test, number_of_classes)
     model = Sequential()
@@ -97,9 +97,13 @@ def predict_digit(request):
                 predictions = character_recognition_model.predict(data)
                 prediction = argmax(predictions[0])
 
+                top_two_predictions = np.argpartition(predictions[0], -2)[-2:]
+                first_prediction = str(top_two_predictions[1])
+                second_prediction = str(top_two_predictions[1])
+
                 # start image compare ================================================================================================================================================================================          
 
-                #retrieving the canvas image----------------------------------------------
+                #retrieving the canvas image-------------------------------------------------------------
                 #converting canvas img to 32 by 32 bit (size of training dataset)
                 with open('jpg_image.jpg', 'r+b') as f: 
                         with Image.open(f) as image:
@@ -108,82 +112,17 @@ def predict_digit(request):
 
                 user_image = cv2.imread("user_image.png")
                 user_image = cv2.cvtColor(user_image, cv2.COLOR_BGR2GRAY)                   
-                cv2.imwrite('C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\compare_img_2.png', user_image)
-                #--------------------------------------------------------------------------
+                cv2.imwrite('C:\\Users\\pjmes\\Desktop\\Nepali-character-recognition-application\\Temp\\canvas_image.png', user_image)
+                #---------------------------------------------------------------------------------------
 
                 # prediction.item() contains the character label predicted by the model
                 print("==============================================================================================================================")
-                print("Model prediction: " + str(prediction.item()))
-
-                # retrieving the image of that predicted character from the train dataset------
-                p = 'C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\Test' + '\\' + str(prediction.item())
-                path = Path(p)
-                files = os.listdir(path)
-                index = random.randrange(0, len(files))
-
-                predicted_character_image = cv2.imread("Test\\" + str(prediction.item()) + "\\" + files[index])
-                predicted_character_image = cv2.cvtColor(predicted_character_image, cv2.COLOR_BGR2GRAY)
-                cv2.imwrite('C:\\Users\\pjmes\Desktop\\Project\\Finalllllllllllllllll\\compare_img_1.png', predicted_character_image)
-                #------------------------------------------------------------------------
-               	
-                original = cv2.imread("compare_img_1.png")
-                image_to_compare = cv2.imread("compare_img_2.png")
-
-
-                # 1) Check if 2 images are equals
-                if original.shape == image_to_compare.shape:
-                    # print("The images have same size and channels")
-                    difference = cv2.subtract(original, image_to_compare)
-                    b, g, r = cv2.split(difference)
-
-                    # if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
-                    #     print("The images are completely Equal")
-                    # else:
-                    #     print("The images are NOT equal")
-
-                # 2) Check for similarities between the 2 images
-                sift = cv2.xfeatures2d.SIFT_create()
-                kp_1, desc_1 = sift.detectAndCompute(original, None)
-                kp_2, desc_2 = sift.detectAndCompute(image_to_compare, None)
-
-                index_params = dict(algorithm=0, trees=5)
-                search_params = dict()
-                flann = cv2.FlannBasedMatcher(index_params, search_params)
-
-                matches = flann.knnMatch(desc_1, desc_2, k=2)
-
-                good_points = []
-                for m, n in matches:
-                    if m.distance < 0.75*n.distance:
-                        good_points.append(m)
-
-                # Define how similar they are
-                number_keypoints = 0
-                if len(kp_1) <= len(kp_2):
-                    number_keypoints = len(kp_1)
-                else:
-                    number_keypoints = len(kp_2)
-
-
-                # print("Keypoints 1ST Image: " + str(len(kp_1)))
-                # print("Keypoints 2ND Image: " + str(len(kp_2)))
-                # print("GOOD Matches:", len(good_points))
-
-                print("How good is the match: ", len(good_points) / number_keypoints * 100)
-
-                similarity = len(good_points) / number_keypoints * 100
-                result = cv2.drawMatches(original, kp_1, image_to_compare, kp_2, good_points, None)
-                cv2.imwrite("feature_matching.jpg", result)
+                print("Model prediction: " + first_prediction)
+                similarity = image_compare(first_prediction)                
                 print("==============================================================================================================================")
                 # end image compare=========================================================================================================================================================
                 
-                if(similarity > 15):
-                    return JsonResponse({'result':prediction.item()})
-                else:
-                    return JsonResponse({'result':10, 'result2':prediction.item()})
-                
-                # print("Success: Prediction successful.")
-                return JsonResponse({'result':prediction.item()})
+                return JsonResponse({'result': first_prediction, 'probability': str(predictions[0][int(first_prediction)]), 'similarity': similarity})
 
 def train_model(request):    
         character_recognition_model = tf.keras.models.load_model('nepali_character_recognition_model.h5')
@@ -195,7 +134,7 @@ def train_model(request):
         data = (data/255)
         data = reshape(data, (32, 32))
         data = data.reshape(1, 32, 32, 1)
-        number_of_classes = 11
+        number_of_classes = 46
         canvas_data = canvas_data.reshape(1, 1)
         canvas_data = np_utils.to_categorical(canvas_data, number_of_classes)
         print(canvas_data.shape)
@@ -205,4 +144,64 @@ def train_model(request):
         return JsonResponse({'result':"Model Trained"})
 
 
-#for image compare
+def image_compare(prediction):
+    # retrieving the image of that predicted character from the train dataset------
+    p = 'C:\\Users\\pjmes\\Desktop\\Nepali-character-recognition-application\\Test' + '\\' + prediction
+    path = Path(p)
+    files = os.listdir(path)
+    index = random.randrange(0, len(files))
+    avg_similarity = 0
+
+    for i in range(0, len(files)):
+        predicted_character_image = cv2.imread("Test\\" + prediction + "\\" + files[i])
+        predicted_character_image = cv2.cvtColor(predicted_character_image, cv2.COLOR_BGR2GRAY)
+        cv2.imwrite('C:\\Users\\pjmes\\Desktop\\Nepali-character-recognition-application\\Temp\\original_image.png', predicted_character_image)
+        
+
+    # predicted_character_image = cv2.imread("Test\\" + prediction + "\\" + files[index])
+    # predicted_character_image = cv2.cvtColor(predicted_character_image, cv2.COLOR_BGR2GRAY)
+    # cv2.imwrite('C:\\Users\\pjmes\\Desktop\\Nepali-character-recognition-application\\Temp\\original_image.png', predicted_character_image)
+    # #------------------------------------------------------------------------
+    
+        original = cv2.imread("Temp\\original_image.png")
+        image_to_compare = cv2.imread("Temp\\canvas_image.png")
+
+        # 1) Check if 2 images are equals
+        if original.shape == image_to_compare.shape:
+            # print("The images have same size and channels")
+            difference = cv2.subtract(original, image_to_compare)
+            b, g, r = cv2.split(difference)
+
+        # 2) Check for similarities between the 2 images
+        sift = cv2.xfeatures2d.SIFT_create()
+        kp_1, desc_1 = sift.detectAndCompute(original, None)
+        kp_2, desc_2 = sift.detectAndCompute(image_to_compare, None)
+
+        index_params = dict(algorithm=0, trees=5)
+        search_params = dict()
+        flann = cv2.FlannBasedMatcher(index_params, search_params)
+
+        matches = flann.knnMatch(desc_1, desc_2, k=2)
+
+        good_points = []
+        for m, n in matches:
+            if m.distance < 0.75*n.distance:
+                good_points.append(m)
+
+        # Define how similar they are
+        number_keypoints = 0
+        if len(kp_1) <= len(kp_2):
+            number_keypoints = len(kp_1)
+        else:
+            number_keypoints = len(kp_2)
+
+        print("Similarity: ", len(good_points) / number_keypoints * 100)
+
+        similarity = len(good_points) / number_keypoints * 100
+        result = cv2.drawMatches(original, kp_1, image_to_compare, kp_2, good_points, None)
+        cv2.imwrite("Temp\\feature_matching_"+str(i)+".jpg", result)
+        avg_similarity = avg_similarity + similarity
+    
+    avg_similarity = avg_similarity/len(files)
+    print("average_similarity: " + str(avg_similarity))
+    return avg_similarity
