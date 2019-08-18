@@ -118,7 +118,8 @@ def predict_digit(request):
                 # prediction.item() contains the character label predicted by the model
                 print("==============================================================================================================================")
                 print("Model prediction: " + first_prediction)
-                similarity = image_compare(first_prediction)                
+                similarity = image_compare(first_prediction)   
+                print('probability: ' + str(predictions[0][int(first_prediction)]))             
                 print("==============================================================================================================================")
                 # end image compare=========================================================================================================================================================
                 
