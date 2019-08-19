@@ -100,6 +100,7 @@ def predict_digit(request):
                 top_two_predictions = np.argpartition(predictions[0], -2)[-2:]
                 first_prediction = str(top_two_predictions[1])
                 second_prediction = str(top_two_predictions[1])
+                print(top_two_predictions)
 
                 # start image compare ================================================================================================================================================================================          
 
